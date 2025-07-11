@@ -58,6 +58,7 @@ export default {
 				},
 				surface: {
 					DEFAULT: 'hsl(var(--surface))',
+					secondary: 'hsl(var(--surface-secondary))',
 					foreground: 'hsl(var(--surface-foreground))'
 				},
 				popover: {
@@ -82,6 +83,7 @@ export default {
 				'gradient-primary': 'var(--gradient-primary)',
 				'gradient-secondary': 'var(--gradient-secondary)',
 				'gradient-hero': 'var(--gradient-hero)',
+				'gradient-accent': 'var(--gradient-accent)',
 			},
 			keyframes: {
 				'accordion-down': {
