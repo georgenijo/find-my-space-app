@@ -27,7 +27,7 @@ export default defineConfig(({ mode }) => ({
         // Manual chunk splitting for better caching
         manualChunks: {
           'vendor-react': ['react', 'react-dom', 'react-router-dom'],
-          'vendor-ui': ['@radix-ui/react-slot', '@radix-ui/react-label', '@radix-ui/react-toast'],
+          'vendor-ui': ['@radix-ui/react-slot', '@radix-ui/react-label', '@radix-ui/react-toast', 'lucide-react'],
           'vendor-utils': ['clsx', 'tailwind-merge', 'class-variance-authority'],
         },
         // Use smaller chunks
