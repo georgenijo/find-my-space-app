@@ -4,11 +4,21 @@ export const measurePerformance = () => {
   // Log navigation timing
   window.addEventListener('load', () => {
     setTimeout(() => {
-      const [navigationEntry] = performance.getEntriesByType('navigation') as PerformanceNavigationTiming[];
-      const pageLoadTime = navigationEntry.loadEventEnd - navigationEntry.startTime;
-      const connectTime = navigationEntry.responseEnd - navigationEntry.requestStart;
-      const renderTime = navigationEntry.domComplete - navigationEntry.domLoading;
+      const navigationEntries = performance.getEntriesByType('navigation') as PerformanceNavigationTiming[];
+      if (navigationEntries.length > 0) {
+        const [navigationEntry] = navigationEntries;
+        const pageLoadTime = navigationEntry.loadEventEnd - navigationEntry.startTime;
+        const connectTime = navigationEntry.responseEnd - navigationEntry.requestStart;
+        const renderTime = navigationEntry.domComplete - navigationEntry.domLoading;
 
+        console.group('⚡ Performance Metrics');
+        console.log(`Page Load Time: ${pageLoadTime}ms`);
+        console.log(`Connect Time: ${connectTime}ms`);
+        console.log(`Render Time: ${renderTime}ms`);
+        console.groupEnd();
+      } else {
+        console.warn('⚠️ No navigation entries available for performance metrics.');
+      }
       console.group('⚡ Performance Metrics');
       console.log(`Page Load Time: ${pageLoadTime}ms`);
       console.log(`Connect Time: ${connectTime}ms`);
