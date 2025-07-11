@@ -147,8 +147,8 @@ const HowItWorks = () => {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-            {findingSteps.map((step, index) => (
-              <Card key={index} className="relative">
+            {findingSteps.map((step) => (
+              <Card key={step.title} className="relative">
                 <CardContent className="p-6">
                   <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4 text-primary">
                     {step.icon}
