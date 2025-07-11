@@ -4,10 +4,10 @@ export const measurePerformance = () => {
   // Log navigation timing
   window.addEventListener('load', () => {
     setTimeout(() => {
-      const perfData = window.performance.timing;
-      const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
-      const connectTime = perfData.responseEnd - perfData.requestStart;
-      const renderTime = perfData.domComplete - perfData.domLoading;
+      const [navigationEntry] = performance.getEntriesByType('navigation') as PerformanceNavigationTiming[];
+      const pageLoadTime = navigationEntry.loadEventEnd - navigationEntry.startTime;
+      const connectTime = navigationEntry.responseEnd - navigationEntry.requestStart;
+      const renderTime = navigationEntry.domComplete - navigationEntry.domLoading;
 
       console.group('⚡ Performance Metrics');
       console.log(`Page Load Time: ${pageLoadTime}ms`);
