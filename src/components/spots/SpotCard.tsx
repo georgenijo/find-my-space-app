@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { MapPin, Clock, Car, Zap, Heart, Star } from "lucide-react";
+import { LazyImage } from "@/components/ui/lazy-image";
 
 interface SpotCardProps {
   spot: {
@@ -62,9 +63,10 @@ const SpotCard = ({
       <Card className="w-64 hover:shadow-md transition-smooth cursor-pointer">
         <CardContent className="p-3">
           <div className="relative mb-3">
-            <img
-              src={imageError ? '/placeholder.svg' : spot.images[0]}
+            <LazyImage
+              src={imageError ? "/placeholder.svg" : spot.images[0]}
               alt={spot.title}
+              placeholderSrc="/placeholder.svg"
               className="w-full h-32 object-cover rounded-md"
               onError={() => setImageError(true)}
             />
@@ -99,9 +101,10 @@ const SpotCard = ({
   return (
     <Card className="overflow-hidden hover:shadow-lg transition-smooth cursor-pointer group">
       <div className="relative">
-        <img
-          src={imageError ? '/placeholder.svg' : spot.images[0]}
+        <LazyImage
+          src={imageError ? "/placeholder.svg" : spot.images[0]}
           alt={spot.title}
+          placeholderSrc="/placeholder.svg"
           className="w-full h-48 object-cover group-hover:scale-105 transition-smooth"
           onError={() => setImageError(true)}
         />
