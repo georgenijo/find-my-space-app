@@ -102,7 +102,7 @@ const SpotCard = ({
     <Card className="overflow-hidden hover:shadow-lg transition-smooth cursor-pointer group">
       <div className="relative">
         <LazyImage
-          src={spot.images[0]}
+          src={imageError ? "/placeholder.svg" : spot.images[0]}
           alt={spot.title}
           placeholderSrc="/placeholder.svg"
           className="w-full h-48 object-cover group-hover:scale-105 transition-smooth"
