@@ -19,10 +19,6 @@ export const measurePerformance = () => {
       } else {
         console.warn('⚠️ No navigation entries available for performance metrics.');
       }
-      console.group('⚡ Performance Metrics');
-      console.log(`Page Load Time: ${pageLoadTime}ms`);
-      console.log(`Connect Time: ${connectTime}ms`);
-      console.log(`Render Time: ${renderTime}ms`);
       
       // Web Vitals
       if ('PerformanceObserver' in window) {
