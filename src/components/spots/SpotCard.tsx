@@ -64,7 +64,7 @@ const SpotCard = ({
         <CardContent className="p-3">
           <div className="relative mb-3">
             <LazyImage
-              src={spot.images[0]}
+              src={imageError ? "/placeholder.svg" : spot.images[0]}
               alt={spot.title}
               placeholderSrc="/placeholder.svg"
               className="w-full h-32 object-cover rounded-md"
