@@ -1,8 +1,9 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { MapPin, Clock, Car, Zap, Heart, Star } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface SpotCardProps {
   spot: {
@@ -24,7 +25,7 @@ interface SpotCardProps {
   onBook?: (id: string) => void;
 }
 
-const SpotCard = ({ 
+const SpotCard = React.memo(({ 
   spot, 
   variant = 'default', 
   onFavorite, 
@@ -59,7 +60,7 @@ const SpotCard = ({
 
   if (variant === 'compact') {
     return (
-      <Card className="w-64 hover:shadow-md transition-smooth cursor-pointer">
+      <Card className="w-64 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer border-border/50">
         <CardContent className="p-3">
           <div className="relative mb-3">
             <img
@@ -70,14 +71,18 @@ const SpotCard = ({
             />
             <Button
               variant="ghost"
-              size="sm"
-              className="absolute top-2 right-2 w-8 h-8 p-0 bg-white/80 hover:bg-white"
+              size="icon-sm"
+              className="absolute top-2 right-2 bg-white/80 backdrop-blur-sm hover:bg-white shadow-sm"
               onClick={handleFavorite}
+              aria-label={spot.isFavorite ? 'Remove from favorites' : 'Add to favorites'}
             >
-              <Heart className={`w-4 h-4 ${spot.isFavorite ? 'fill-primary text-primary' : 'text-muted-foreground'}`} />
+              <Heart className={cn(
+                "w-4 h-4 transition-colors",
+                spot.isFavorite ? 'fill-primary text-primary' : 'text-muted-foreground'
+              )} />
             </Button>
           </div>
-          <h3 className="font-semibold text-sm mb-1 line-clamp-1">{spot.title}</h3>
+          <h3 className="font-semibold text-sm mb-1 line-clamp-1 text-foreground">{spot.title}</h3>
           <p className="text-xs text-muted-foreground mb-2 line-clamp-1">
             <MapPin className="w-3 h-3 inline mr-1" />
             {spot.address}
@@ -97,7 +102,7 @@ const SpotCard = ({
   }
 
   return (
-    <Card className="overflow-hidden hover:shadow-lg transition-smooth cursor-pointer group">
+    <Card className="overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer group border-border/50">
       <div className="relative">
         <img
           src={imageError ? '/placeholder.svg' : spot.images[0]}
@@ -107,14 +112,24 @@ const SpotCard = ({
         />
         <Button
           variant="ghost"
-          size="sm"
-          className="absolute top-3 right-3 w-9 h-9 p-0 bg-white/80 hover:bg-white"
+          size="icon"
+          className="absolute top-3 right-3 bg-white/80 backdrop-blur-sm hover:bg-white shadow-sm"
           onClick={handleFavorite}
+          aria-label={spot.isFavorite ? 'Remove from favorites' : 'Add to favorites'}
         >
-          <Heart className={`w-4 h-4 ${spot.isFavorite ? 'fill-primary text-primary' : 'text-muted-foreground'}`} />
+          <Heart className={cn(
+            "w-4 h-4 transition-colors",
+            spot.isFavorite ? 'fill-primary text-primary' : 'text-muted-foreground'
+          )} />
         </Button>
         <div className="absolute top-3 left-3">
-          <Badge variant={spot.isAvailable ? "default" : "secondary"} className="bg-success">
+          <Badge 
+            variant={spot.isAvailable ? "default" : "secondary"} 
+            className={cn(
+              "shadow-sm backdrop-blur-sm",
+              spot.isAvailable ? "bg-success/90 text-white" : "bg-destructive/90 text-white"
+            )}
+          >
             {spot.isAvailable ? 'Available' : 'Occupied'}
           </Badge>
         </div>
@@ -154,7 +169,8 @@ const SpotCard = ({
           </div>
           <Button 
             onClick={handleBook}
-            className="bg-gradient-primary hover:opacity-90"
+            variant="gradient"
+            className="shadow-sm"
           >
             Book Now
           </Button>
@@ -162,6 +178,8 @@ const SpotCard = ({
       </CardContent>
     </Card>
   );
-};
+});
+
+SpotCard.displayName = "SpotCard";
 
 export default SpotCard;

@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import { tokens } from "./src/styles/tokens";
 
 export default {
 	darkMode: ["class"],
@@ -19,46 +20,116 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				inter: ['Inter', 'system-ui', 'sans-serif'],
+				sans: tokens.typography.fontFamily.sans,
+				mono: tokens.typography.fontFamily.mono,
 			},
 			colors: {
+				// System colors from CSS variables
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
+				
+				// Brand colors
 				primary: {
+					50: 'hsl(var(--color-primary-50))',
+					100: 'hsl(var(--color-primary-100))',
+					200: 'hsl(var(--color-primary-200))',
+					300: 'hsl(var(--color-primary-300))',
+					400: 'hsl(var(--color-primary-400))',
+					500: 'hsl(var(--color-primary-500))',
+					600: 'hsl(var(--color-primary-600))',
+					700: 'hsl(var(--color-primary-700))',
+					800: 'hsl(var(--color-primary-800))',
+					900: 'hsl(var(--color-primary-900))',
 					DEFAULT: 'hsl(var(--primary))',
-					dark: 'hsl(var(--primary-dark))',
 					foreground: 'hsl(var(--primary-foreground))'
 				},
 				secondary: {
+					50: 'hsl(var(--color-secondary-50))',
+					100: 'hsl(var(--color-secondary-100))',
+					200: 'hsl(var(--color-secondary-200))',
+					300: 'hsl(var(--color-secondary-300))',
+					400: 'hsl(var(--color-secondary-400))',
+					500: 'hsl(var(--color-secondary-500))',
+					600: 'hsl(var(--color-secondary-600))',
+					700: 'hsl(var(--color-secondary-700))',
+					800: 'hsl(var(--color-secondary-800))',
+					900: 'hsl(var(--color-secondary-900))',
 					DEFAULT: 'hsl(var(--secondary))',
 					foreground: 'hsl(var(--secondary-foreground))'
 				},
+				accent: {
+					50: 'hsl(var(--color-accent-50))',
+					100: 'hsl(var(--color-accent-100))',
+					200: 'hsl(var(--color-accent-200))',
+					300: 'hsl(var(--color-accent-300))',
+					400: 'hsl(var(--color-accent-400))',
+					500: 'hsl(var(--color-accent-500))',
+					600: 'hsl(var(--color-accent-600))',
+					700: 'hsl(var(--color-accent-700))',
+					800: 'hsl(var(--color-accent-800))',
+					900: 'hsl(var(--color-accent-900))',
+					DEFAULT: 'hsl(var(--accent))',
+					foreground: 'hsl(var(--accent-foreground))'
+				},
+				
+				// Semantic colors
 				destructive: {
 					DEFAULT: 'hsl(var(--destructive))',
 					foreground: 'hsl(var(--destructive-foreground))'
 				},
 				success: {
-					DEFAULT: 'hsl(var(--success))',
-					foreground: 'hsl(var(--success-foreground))'
+					DEFAULT: 'hsl(var(--color-success))',
+					light: 'hsl(var(--color-success-light))',
+					dark: 'hsl(var(--color-success-dark))',
+					foreground: 'hsl(var(--color-success-foreground))'
 				},
 				warning: {
-					DEFAULT: 'hsl(var(--warning))',
-					foreground: 'hsl(var(--warning-foreground))'
+					DEFAULT: 'hsl(var(--color-warning))',
+					light: 'hsl(var(--color-warning-light))',
+					dark: 'hsl(var(--color-warning-dark))',
+					foreground: 'hsl(var(--color-warning-foreground))'
 				},
+				error: {
+					DEFAULT: 'hsl(var(--color-error))',
+					light: 'hsl(var(--color-error-light))',
+					dark: 'hsl(var(--color-error-dark))',
+					foreground: 'hsl(var(--color-error-foreground))'
+				},
+				info: {
+					DEFAULT: 'hsl(var(--color-info))',
+					light: 'hsl(var(--color-info-light))',
+					dark: 'hsl(var(--color-info-dark))',
+					foreground: 'hsl(var(--color-info-foreground))'
+				},
+				
+				// Neutral colors
+				neutral: {
+					0: 'hsl(var(--color-neutral-0))',
+					50: 'hsl(var(--color-neutral-50))',
+					100: 'hsl(var(--color-neutral-100))',
+					200: 'hsl(var(--color-neutral-200))',
+					300: 'hsl(var(--color-neutral-300))',
+					400: 'hsl(var(--color-neutral-400))',
+					500: 'hsl(var(--color-neutral-500))',
+					600: 'hsl(var(--color-neutral-600))',
+					700: 'hsl(var(--color-neutral-700))',
+					800: 'hsl(var(--color-neutral-800))',
+					900: 'hsl(var(--color-neutral-900))',
+					950: 'hsl(var(--color-neutral-950))',
+				},
+				
+				// Surface colors
 				muted: {
 					DEFAULT: 'hsl(var(--muted))',
 					foreground: 'hsl(var(--muted-foreground))'
 				},
-				accent: {
-					DEFAULT: 'hsl(var(--accent))',
-					foreground: 'hsl(var(--accent-foreground))'
-				},
 				surface: {
 					DEFAULT: 'hsl(var(--surface))',
-					foreground: 'hsl(var(--surface-foreground))'
+					secondary: 'hsl(var(--surface-secondary))',
+					tertiary: 'hsl(var(--surface-tertiary))',
 				},
 				popover: {
 					DEFAULT: 'hsl(var(--popover))',
@@ -69,20 +140,43 @@ export default {
 					foreground: 'hsl(var(--card-foreground))'
 				}
 			},
+			spacing: tokens.spacing,
+			fontSize: tokens.typography.fontSize,
+			fontWeight: tokens.typography.fontWeight,
+			letterSpacing: tokens.typography.letterSpacing,
 			borderRadius: {
-				lg: 'var(--radius)',
-				md: 'calc(var(--radius) - 2px)',
-				sm: 'calc(var(--radius) - 4px)'
+				none: tokens.borderRadius.none,
+				sm: tokens.borderRadius.sm,
+				DEFAULT: tokens.borderRadius.DEFAULT,
+				md: tokens.borderRadius.md,
+				lg: tokens.borderRadius.lg,
+				xl: tokens.borderRadius.xl,
+				'2xl': tokens.borderRadius['2xl'],
+				'3xl': tokens.borderRadius['3xl'],
+				full: tokens.borderRadius.full,
 			},
 			boxShadow: {
-				'glow': 'var(--shadow-glow)',
-				'smooth': 'var(--shadow)',
+				xs: 'var(--shadow-xs)',
+				sm: 'var(--shadow-sm)',
+				DEFAULT: 'var(--shadow)',
+				md: 'var(--shadow-md)',
+				lg: 'var(--shadow-lg)',
+				xl: 'var(--shadow-xl)',
+				'2xl': 'var(--shadow-2xl)',
+				inner: 'var(--shadow-inner)',
+				glow: 'var(--shadow-glow)',
+				none: 'none',
 			},
 			backgroundImage: {
 				'gradient-primary': 'var(--gradient-primary)',
 				'gradient-secondary': 'var(--gradient-secondary)',
+				'gradient-accent': 'var(--gradient-accent)',
 				'gradient-hero': 'var(--gradient-hero)',
+				'gradient-surface': 'var(--gradient-surface)',
 			},
+			blur: tokens.blur,
+			transitionDuration: tokens.animation.durations,
+			transitionTimingFunction: tokens.animation.easings,
 			keyframes: {
 				'accordion-down': {
 					from: { height: '0', opacity: '0' },
