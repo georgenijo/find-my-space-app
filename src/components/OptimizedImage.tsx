@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, ImgHTMLAttributes } from 'react';
 import { cn } from '@/lib/utils';
-import { generateBlurPlaceholder, lazyLoadImage } from '@/lib/image-optimization';
+import { generateBlurPlaceholder } from '@/lib/image-optimization';
 
 interface OptimizedImageProps extends ImgHTMLAttributes<HTMLImageElement> {
   src: string;
@@ -22,10 +22,12 @@ export const OptimizedImage = ({
   blurDataURL,
   className,
   onLoad,
+  onError,
   ...props
 }: OptimizedImageProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(priority);
+  const [hasError, setHasError] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
@@ -55,6 +57,11 @@ export const OptimizedImage = ({
     onLoad?.(e);
   };
 
+  const handleError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    setHasError(true);
+    onError?.(e);
+  };
+
   const placeholderSrc = placeholder === 'blur' 
     ? (blurDataURL || (width && height ? generateBlurPlaceholder(width, height) : undefined))
     : undefined;
@@ -79,6 +86,7 @@ export const OptimizedImage = ({
         width={width}
         height={height}
         onLoad={handleLoad}
+        onError={handleError}
         className={cn(
           'transition-opacity duration-300',
           isLoaded ? 'opacity-100' : 'opacity-0',

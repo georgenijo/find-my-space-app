@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { MapPin, Facebook, Twitter, Instagram, Mail } from "lucide-react";
-import { cn } from "@/lib/utils";
 
 const Footer = React.memo(() => {
   return (
@@ -24,28 +23,34 @@ const Footer = React.memo(() => {
             </p>
             <div className="flex space-x-4">
               <a 
-                href="#" 
+                href="https://facebook.com" 
                 className="text-muted-foreground hover:text-primary transition-colors duration-200 hover:scale-110 transform"
                 aria-label="Facebook"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <Facebook className="w-5 h-5" />
               </a>
               <a 
-                href="#" 
+                href="https://twitter.com" 
                 className="text-muted-foreground hover:text-primary transition-colors duration-200 hover:scale-110 transform"
                 aria-label="Twitter"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <Twitter className="w-5 h-5" />
               </a>
               <a 
-                href="#" 
+                href="https://instagram.com" 
                 className="text-muted-foreground hover:text-primary transition-colors duration-200 hover:scale-110 transform"
                 aria-label="Instagram"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <Instagram className="w-5 h-5" />
               </a>
               <a 
-                href="#" 
+                href="mailto:contact@findmyspot.com" 
                 className="text-muted-foreground hover:text-primary transition-colors duration-200 hover:scale-110 transform"
                 aria-label="Email"
               >

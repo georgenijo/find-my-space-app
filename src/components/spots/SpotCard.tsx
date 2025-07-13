@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Clock, Car, Zap, Heart, Star } from "lucide-react";
+import { MapPin, Clock, Car, Zap, Heart, Star, Navigation } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface SpotCardProps {
@@ -58,6 +58,24 @@ const SpotCard = React.memo(({
     }
   };
 
+  const getPriceUnit = (priceType: 'hourly' | 'daily' | 'monthly') => {
+    switch (priceType) {
+      case 'hourly': return 'hr';
+      case 'daily': return 'day';
+      case 'monthly': return 'mo';
+      default: return 'hr';
+    }
+  };
+
+  const getPriceUnitLong = (priceType: 'hourly' | 'daily' | 'monthly') => {
+    switch (priceType) {
+      case 'hourly': return 'hour';
+      case 'daily': return 'day';
+      case 'monthly': return 'month';
+      default: return 'hour';
+    }
+  };
+
   if (variant === 'compact') {
     return (
       <Card className="w-64 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer border-border/50">
@@ -67,33 +85,31 @@ const SpotCard = React.memo(({
               src={imageError ? '/placeholder.svg' : spot.images[0]}
               alt={spot.title}
               className="w-full h-32 object-cover rounded-md"
-              onError={() => setImageError(true)}
             />
             <Button
               variant="ghost"
-              size="icon-sm"
-              className="absolute top-2 right-2 bg-white/80 backdrop-blur-sm hover:bg-white shadow-sm"
+              size="icon"
+              className="absolute top-2 right-2 h-8 w-8 bg-white/80 hover:bg-white/90 transition-colors duration-200"
               onClick={handleFavorite}
-              aria-label={spot.isFavorite ? 'Remove from favorites' : 'Add to favorites'}
             >
-              <Heart className={cn(
-                "w-4 h-4 transition-colors",
-                spot.isFavorite ? 'fill-primary text-primary' : 'text-muted-foreground'
-              )} />
+              <Heart className={`w-4 h-4 ${spot.isFavorite ? 'fill-red-500 text-red-500' : 'text-gray-600'}`} />
             </Button>
           </div>
-          <h3 className="font-semibold text-sm mb-1 line-clamp-1 text-foreground">{spot.title}</h3>
-          <p className="text-xs text-muted-foreground mb-2 line-clamp-1">
-            <MapPin className="w-3 h-3 inline mr-1" />
-            {spot.address}
-          </p>
-          <div className="flex items-center justify-between">
-            <span className="font-bold text-primary">
-              ${spot.price}/{spot.priceType === 'hourly' ? 'hr' : spot.priceType === 'daily' ? 'day' : 'mo'}
-            </span>
-            <div className="flex items-center text-xs">
-              <Star className="w-3 h-3 fill-yellow-400 text-yellow-400 mr-1" />
-              {spot.rating}
+          <div className="space-y-2">
+            <h3 className="font-medium text-sm line-clamp-1">{spot.title}</h3>
+            <p className="text-xs text-muted-foreground line-clamp-1">{spot.address}</p>
+            <div className="flex items-center text-xs text-muted-foreground">
+              <MapPin className="w-3 h-3 mr-1" />
+              <span>{spot.distance}</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="font-bold text-primary">
+                ${spot.price}/{getPriceUnit(spot.priceType)}
+              </span>
+              <div className="flex items-center text-xs">
+                <Star className="w-3 h-3 fill-yellow-400 text-yellow-400 mr-1" />
+                <span>{spot.rating}</span>
+              </div>
             </div>
           </div>
         </CardContent>
@@ -108,72 +124,76 @@ const SpotCard = React.memo(({
           src={imageError ? '/placeholder.svg' : spot.images[0]}
           alt={spot.title}
           className="w-full h-48 object-cover group-hover:scale-105 transition-smooth"
-          onError={() => setImageError(true)}
         />
         <Button
           variant="ghost"
           size="icon"
-          className="absolute top-3 right-3 bg-white/80 backdrop-blur-sm hover:bg-white shadow-sm"
+          className="absolute top-4 right-4 h-10 w-10 bg-white/80 hover:bg-white/90 transition-colors duration-200"
           onClick={handleFavorite}
-          aria-label={spot.isFavorite ? 'Remove from favorites' : 'Add to favorites'}
         >
-          <Heart className={cn(
-            "w-4 h-4 transition-colors",
-            spot.isFavorite ? 'fill-primary text-primary' : 'text-muted-foreground'
-          )} />
+          <Heart className={`w-5 h-5 ${spot.isFavorite ? 'fill-red-500 text-red-500' : 'text-gray-600'}`} />
         </Button>
-        <div className="absolute top-3 left-3">
-          <Badge 
-            variant={spot.isAvailable ? "default" : "secondary"} 
-            className={cn(
-              "shadow-sm backdrop-blur-sm",
-              spot.isAvailable ? "bg-success/90 text-white" : "bg-destructive/90 text-white"
-            )}
-          >
+        
+        {/* Availability Badge */}
+        <div className="absolute bottom-4 left-4">
+          <Badge variant={spot.isAvailable ? "default" : "secondary"} className="text-xs">
             {spot.isAvailable ? 'Available' : 'Occupied'}
           </Badge>
         </div>
       </div>
-
-      <CardContent className="p-4">
-        <div className="flex items-start justify-between mb-2">
-          <h3 className="font-semibold text-lg line-clamp-1">{spot.title}</h3>
-          <div className="flex items-center text-sm">
-            <Star className="w-4 h-4 fill-yellow-400 text-yellow-400 mr-1" />
-            <span>{spot.rating}</span>
-            <span className="text-muted-foreground ml-1">({spot.reviews})</span>
-          </div>
-        </div>
-
-        <p className="text-muted-foreground mb-3 flex items-center">
-          <MapPin className="w-4 h-4 mr-1 flex-shrink-0" />
-          <span className="line-clamp-1">{spot.address}</span>
-          <span className="ml-2 text-xs">• {spot.distance}</span>
-        </p>
-
-        <div className="flex flex-wrap gap-2 mb-4">
-          {spot.features.slice(0, 3).map((feature, index) => (
-            <Badge key={index} variant="outline" className="text-xs">
-              {getFeatureIcon(feature)}
-              <span className="ml-1">{feature}</span>
-            </Badge>
-          ))}
-        </div>
-
-        <div className="flex items-center justify-between">
+      <CardContent className="p-6">
+        <div className="space-y-4">
           <div>
-            <span className="text-2xl font-bold text-primary">${spot.price}</span>
-            <span className="text-muted-foreground">
-              /{spot.priceType === 'hourly' ? 'hour' : spot.priceType === 'daily' ? 'day' : 'month'}
-            </span>
+            <h3 className="font-semibold text-lg mb-2">{spot.title}</h3>
+            <div className="flex items-center text-muted-foreground mb-3">
+              <MapPin className="w-4 h-4 mr-2" />
+              <span className="text-sm">{spot.address}</span>
+            </div>
+            <div className="flex items-center text-muted-foreground mb-4">
+              <Navigation className="w-4 h-4 mr-2" />
+              <span className="text-sm">{spot.distance}</span>
+            </div>
           </div>
-          <Button 
-            onClick={handleBook}
-            variant="gradient"
-            className="shadow-sm"
-          >
-            Book Now
-          </Button>
+          
+          {/* Features */}
+          <div className="flex flex-wrap gap-2">
+            {spot.features.slice(0, 3).map((feature, index) => (
+              <Badge key={index} variant="outline" className="text-xs flex items-center gap-1">
+                {getFeatureIcon(feature)}
+                {feature}
+              </Badge>
+            ))}
+            {spot.features.length > 3 && (
+              <Badge variant="outline" className="text-xs">
+                +{spot.features.length - 3} more
+              </Badge>
+            )}
+          </div>
+          
+          {/* Rating */}
+          <div className="flex items-center gap-2">
+            <div className="flex items-center">
+              <Star className="w-4 h-4 fill-yellow-400 text-yellow-400 mr-1" />
+              <span className="font-medium">{spot.rating}</span>
+            </div>
+            <span className="text-muted-foreground text-sm">({spot.reviews} reviews)</span>
+          </div>
+          
+          {/* Price and Actions */}
+          <div className="flex items-center justify-between">
+            <div className="flex items-baseline gap-1">
+              <span className="text-2xl font-bold text-primary">${spot.price}</span>
+              <span className="text-muted-foreground">
+                /{getPriceUnitLong(spot.priceType)}
+              </span>
+            </div>
+            <Button 
+              className="bg-gradient-hero hover:bg-gradient-hero/90 transition-all duration-200"
+              onClick={handleBook}
+            >
+              Book Now
+            </Button>
+          </div>
         </div>
       </CardContent>
     </Card>
