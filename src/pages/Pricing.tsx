@@ -3,8 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
-import { Separator } from "@/components/ui/separator";
-import { Check, X, Star, Users, Car, MapPin, Shield, TrendingUp, Clock, CreditCard, Headphones } from "lucide-react";
+import { Check, X, Users, Shield, TrendingUp, Headphones } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const Pricing = () => {

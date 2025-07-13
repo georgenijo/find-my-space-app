@@ -480,7 +480,7 @@ const ListSpot = () => {
                             <div key={index} className="relative group">
                               <img
                                 src={image}
-                                alt={`Spot photo ${index + 1}`}
+                                alt={`Spot ${index + 1}`}
                                 className="w-full h-32 object-cover rounded-lg"
                               />
                               <Button

@@ -130,7 +130,7 @@ export class PerformanceMonitor {
    */
   getMemoryUsage(): { usedJSHeapSize?: number; totalJSHeapSize?: number; limit?: number } | null {
     if ('memory' in performance) {
-      const memory = (performance as any).memory;
+      const {memory} = (performance as any);
       return {
         usedJSHeapSize: memory.usedJSHeapSize,
         totalJSHeapSize: memory.totalJSHeapSize,

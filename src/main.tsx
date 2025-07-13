@@ -8,7 +8,7 @@ import { registerServiceWorker } from './lib/service-worker'
 // Initialize performance optimizations
 if (import.meta.env.PROD) {
   // Performance monitoring
-  import('./lib/performance-monitoring').then(({ performanceMonitor }) => {
+  import('./lib/performance-monitoring').then(({ performanceMonitor: _performanceMonitor }) => {
     // Performance monitor will auto-initialize
     console.log('Performance monitoring initialized');
   });

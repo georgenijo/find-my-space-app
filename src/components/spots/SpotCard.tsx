@@ -3,7 +3,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { MapPin, Clock, Car, Zap, Heart, Star, Navigation } from "lucide-react";
-import { cn } from "@/lib/utils";
 
 interface SpotCardProps {
   spot: {
@@ -25,24 +24,21 @@ interface SpotCardProps {
   onBook?: (id: string) => void;
 }
 
-const SpotCard = React.memo(({ 
-  spot, 
-  variant = 'default', 
-  onFavorite, 
-  onBook 
-}: SpotCardProps) => {
+export const SpotCard = ({ spot, variant = 'default', onFavorite, onBook }: SpotCardProps) => {
   const [imageError, setImageError] = useState(false);
 
   const handleFavorite = (e: React.MouseEvent) => {
-    e.preventDefault();
     e.stopPropagation();
     onFavorite?.(spot.id);
   };
 
   const handleBook = (e: React.MouseEvent) => {
-    e.preventDefault();
     e.stopPropagation();
     onBook?.(spot.id);
+  };
+
+  const handleImageError = () => {
+    setImageError(true);
   };
 
   const getFeatureIcon = (feature: string) => {
@@ -81,10 +77,12 @@ const SpotCard = React.memo(({
       <Card className="w-64 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer border-border/50">
         <CardContent className="p-3">
           <div className="relative mb-3">
+            {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
             <img
               src={imageError ? '/placeholder.svg' : spot.images[0]}
               alt={spot.title}
               className="w-full h-32 object-cover rounded-md"
+              onError={handleImageError}
             />
             <Button
               variant="ghost"
@@ -120,10 +118,12 @@ const SpotCard = React.memo(({
   return (
     <Card className="overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer group border-border/50">
       <div className="relative">
+        {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
         <img
           src={imageError ? '/placeholder.svg' : spot.images[0]}
           alt={spot.title}
           className="w-full h-48 object-cover group-hover:scale-105 transition-smooth"
+          onError={handleImageError}
         />
         <Button
           variant="ghost"
@@ -198,7 +198,7 @@ const SpotCard = React.memo(({
       </CardContent>
     </Card>
   );
-});
+};
 
 SpotCard.displayName = "SpotCard";
 

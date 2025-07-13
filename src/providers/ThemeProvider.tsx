@@ -121,7 +121,7 @@ export function ThemeProvider({
 
     const handleStorageChange = (e: StorageEvent) => {
       if (e.key === storageKey) {
-        const newValue = e.newValue;
+        const {newValue} = e;
         if (newValue === 'light' || newValue === 'dark' || newValue === 'system') {
           setThemeState(newValue);
         }

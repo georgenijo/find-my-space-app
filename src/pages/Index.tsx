@@ -1,25 +1,16 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Card, CardContent } from "@/components/ui/card";
-import { SearchBar } from "@/components/ui/search-bar";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
-import SpotCard from "@/components/spots/SpotCard";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
 import { 
-  MapPin, 
   Search, 
   Shield, 
+  Users, 
+  Star, 
   Clock, 
-  DollarSign, 
-  Star,
-  ArrowRight,
-  CheckCircle,
-  Users,
-  Car,
-  Smartphone
-} from "lucide-react";
+  CheckCircle, 
+  ArrowRight 
+} from 'lucide-react';
 
 const Index = () => {
   const [searchLocation, setSearchLocation] = useState("");

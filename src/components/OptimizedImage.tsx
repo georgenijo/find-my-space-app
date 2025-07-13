@@ -27,7 +27,7 @@ export const OptimizedImage = ({
 }: OptimizedImageProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(priority);
-  const [hasError, setHasError] = useState(false);
+  const [_hasError, setHasError] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
@@ -79,6 +79,7 @@ export const OptimizedImage = ({
       )}
       
       {/* Main image */}
+      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
       <img
         ref={imgRef}
         src={isInView ? src : placeholderSrc || src}

@@ -64,7 +64,7 @@ export * from '@testing-library/react';
 export { customRender as render };
 
 // Accessibility testing helper
-export const testAccessibility = async (container: HTMLElement) => {
+export const testAccessibility = async (_container: HTMLElement) => {
   const violations = await runAccessibilityTests();
   if (violations.length > 0) {
     throw new Error(`Accessibility violations found:\n${formatA11yViolations(violations)}`);

@@ -12,7 +12,7 @@ interface ImageLoaderProps {
  * Generate optimized image URL with proper sizing
  * Can be extended to use image CDN services like Cloudinary or Imgix
  */
-export const imageLoader = ({ src, width, quality = 75 }: ImageLoaderProps): string => {
+export const imageLoader = ({ src, width: _width, quality: _quality = 75 }: ImageLoaderProps): string => {
   // For now, return the original src
   // In production, integrate with an image CDN
   return src;
@@ -26,7 +26,7 @@ export const lazyLoadImage = (imgElement: HTMLImageElement) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         const img = entry.target as HTMLImageElement;
-        const src = img.dataset.src;
+        const {src} = img.dataset;
         
         if (src) {
           img.src = src;

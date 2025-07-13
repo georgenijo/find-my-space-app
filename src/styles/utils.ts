@@ -4,7 +4,6 @@
  */
 
 import { tokens } from './tokens';
-import type { ColorToken, SpacingToken } from './tokens';
 
 /**
  * Convert HSL CSS variable to RGB values

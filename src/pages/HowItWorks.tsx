@@ -1,3 +1,4 @@
+import React from 'react';
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -5,20 +6,14 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { 
   Search, 
-  Calendar,
-  CreditCard,
-  Car,
-  Shield,
-  MessageCircle,
-  ChevronRight,
-  Users,
-  DollarSign,
-  Clock,
-  MapPin,
-  Smartphone,
-  CheckCircle,
-  ArrowRight
-} from "lucide-react";
+  Calendar, 
+  CreditCard, 
+  Shield, 
+  Users, 
+  Clock, 
+  CheckCircle, 
+  ArrowRight 
+} from 'lucide-react';
 
 const HowItWorks = () => {
   const steps = [

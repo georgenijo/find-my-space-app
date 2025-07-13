@@ -47,7 +47,7 @@ class PerformanceMonitor {
       });
       
       observer.observe({ entryTypes: ['largest-contentful-paint'] });
-    } catch (e) {
+    } catch (_e) {
       console.debug('LCP observer not supported');
     }
   }
@@ -67,14 +67,14 @@ class PerformanceMonitor {
       });
       
       observer.observe({ entryTypes: ['first-input'] });
-    } catch (e) {
-      console.debug('FID observer not supported');
+          } catch (_e) {
+        console.debug('FID observer not supported');
     }
   }
 
   private observeCLS() {
     let clsValue = 0;
-    let clsEntries: any[] = [];
+    const clsEntries: any[] = [];
 
     try {
       const observer = new PerformanceObserver((list) => {
@@ -101,8 +101,8 @@ class PerformanceMonitor {
           });
         }
       });
-    } catch (e) {
-      console.debug('CLS observer not supported');
+          } catch (_e) {
+        console.debug('CLS observer not supported');
     }
   }
 
@@ -123,8 +123,8 @@ class PerformanceMonitor {
       });
       
       observer.observe({ entryTypes: ['paint'] });
-    } catch (e) {
-      console.debug('FCP observer not supported');
+          } catch (_e) {
+        console.debug('FCP observer not supported');
     }
   }
 
@@ -157,7 +157,7 @@ class PerformanceMonitor {
       };
 
       resources.forEach((resource) => {
-        const duration = resource.duration;
+        const {duration} = resource;
         summary.totalDuration += duration;
 
         // Track slow resources (> 500ms)
@@ -225,7 +225,7 @@ class PerformanceMonitor {
 }
 
 // Export singleton instance
-export const performanceMonitor = new PerformanceMonitor((metrics) => {
+export const performanceMonitor = new PerformanceMonitor((_metrics) => {
   // In production, send metrics to analytics service
   // Example: sendToAnalytics(metrics);
 });
