@@ -130,6 +130,7 @@ export default {
 					DEFAULT: 'hsl(var(--surface))',
 					secondary: 'hsl(var(--surface-secondary))',
 					tertiary: 'hsl(var(--surface-tertiary))',
+					foreground: 'hsl(var(--surface-foreground))'
 				},
 				popover: {
 					DEFAULT: 'hsl(var(--popover))',
@@ -173,6 +174,7 @@ export default {
 				'gradient-accent': 'var(--gradient-accent)',
 				'gradient-hero': 'var(--gradient-hero)',
 				'gradient-surface': 'var(--gradient-surface)',
+				'gradient-accent': 'var(--gradient-accent)',
 			},
 			blur: tokens.blur,
 			transitionDuration: tokens.animation.durations,
