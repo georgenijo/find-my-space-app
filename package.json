@@ -16,8 +16,8 @@
     "test:coverage": "vitest --coverage",
     "test:watch": "vitest --watch",
     "test:a11y": "vitest --run --grep accessibility",
-    "type-check": "tsc --noEmit",
-    "check-all": "npm run type-check && npm run lint && npm run test -- --run"
+    "typecheck": "tsc --noEmit",
+    "check-all": "npm run typecheck && npm run lint && npm run test -- --run"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
